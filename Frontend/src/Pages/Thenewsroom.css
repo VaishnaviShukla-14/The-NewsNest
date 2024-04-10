@@ -1,0 +1,52 @@
+.section{
+    width: 100%;
+    min-height: 100vh; /* changed height to min-height */
+  }
+
+
+.news-section .newsnav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: sticky;
+    top: 20px;
+    right: 0;
+    left: 0;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+  }
+
+ .navigation-division{
+    text-align: center;
+    display:flex;
+    margin-right: 80px;
+ }
+
+ .nav-options {
+  display: flex; /* Arrange options horizontally */
+  list-style: none; /* Remove default bullet points */
+  padding: 0; /* Remove default padding */
+  margin: 0; /* Remove default margin */
+  /* Center the options within the navigation (optional) */
+  /* justify-content: center; */  /* Uncomment if you want centering */
+}
+
+.nav-options li {
+  padding: 5px 10px; /* Add padding to each option */
+  cursor: pointer; /* Style on hover (optional) */
+  font-weight: bold;
+  /* Remove default list item margin for horizontal alignment */
+  margin-right: 10px;  /* Optional spacing between items */
+  /* Remove list item bullets */
+  list-style: none;
+  border-top: 4px solid #000;
+  margin-bottom:20px;
+}
+
+  .nav-options li:hover {
+    /* Hover color */
+    color: maroon;
+    transform: translateY(-3px);    
+  }  
+
+  

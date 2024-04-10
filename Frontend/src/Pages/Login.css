@@ -1,0 +1,139 @@
+ /* body{
+    margin:0%;
+    padding: 0%;
+     padding-top: 13%; 
+    align-items: center;
+    align-content: center;
+    margin-left: 40%; 
+     margin-right: 41%; 
+      font-family: sans-serif;
+       /* background-image: URL("/public/Images/login_logo.jpg");  */
+  /* }
+   bgimage {
+    background-size: cover;
+    height: 100vh !important;
+    width: 100vw !important;
+    
+     
+} 
+
+.register-link p{
+    display:block;
+} 
+
+
+  .Login_form{
+    padding-top: 10%; 
+    margin-left: 41%; 
+    margin-right: 40%; 
+    color:black;
+    border-radius:10px;
+    border:2px solid rgba(255,255,255,.2);
+    box-shadow:0 0 20px rgba(0,0,0,.2);
+  }
+  
+.Login_heading{
+    color:rgb(88, 72, 72);
+  }
+
+  .Link_P{
+    color:"blue";
+  }   */
+
+
+
+  
+  .Login_container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-image: URL("/public/Images/login_image10.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    box-shadow: 100px;
+   
+}
+
+.main-form {
+    background-color: rgba(255, 255, 255, 0.8); /* Changed to semi-transparent white */
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 400px;
+    position: absolute;
+    top: 50%;
+
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: transparent;
+}
+
+.wrapper {
+    text-align: center;
+}
+
+.form-control {
+    width: calc(100% - 40px);
+    border: none;
+    outline: none;
+    padding: 10px 20px;
+    margin-bottom: 20px;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: relative;
+}
+
+.btn-design{
+    background-color: black;
+    color:white;
+    border-radius:12px;
+    height:35px;
+    font-weight: bold;
+    letter-spacing: 1.5px;
+}
+
+.input-box {
+    display: flex;
+    align-items: center;
+}
+
+.icon {
+    color: #0d0d0d;
+    position: absolute;
+    top: 40%;
+    transform: translateY(-40%);
+    right: 0px;
+    margin-bottom:10px;
+}
+
+/* .icon-input {
+    background-image: url('/frontend/public/Images/profile_icon.jpg'); 
+     background-position: calc(100% - 10px) center; 
+    background-size: 20px;  
+    background-repeat: no-repeat;
+    padding-right: 30px; 
+} */
+
+.remember-forgot {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.submit {
+    text-align: center;
+}
+
+.register-link {
+    text-align: center;
+}
+
+.register-link p {
+    margin-bottom: 10px;
+}
+
+.register-link a {
+    color: #007bff;
+}

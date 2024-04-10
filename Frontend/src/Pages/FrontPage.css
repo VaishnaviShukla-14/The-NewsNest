@@ -1,0 +1,13 @@
+#animatedText {
+  animation: slideInOpacity 6s ease-in-out infinite;
+  opacity: 0;
+}
+
+@keyframes slideInOpacity {
+  from { transform: translateX(100%); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+
+
+

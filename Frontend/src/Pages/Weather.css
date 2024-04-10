@@ -1,0 +1,192 @@
+/* .input {
+  position: relative !important;
+  outline: none !important;
+  width: 100%;
+  border: none;
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 5px;
+}
+
+.input:focus {
+  outline: none !important;
+  border: 2px solid #6c63ff;
+}
+
+.icon {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  font-size: 24px;
+  color: #6c63ff;
+  cursor: pointer;
+}
+
+@media (max-width: 600px) {
+  .icon {
+    left: 330px;
+  }
+}
+
+.card {
+  border: none !important;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.main-container {
+  display: flex;
+  justify-content: space-around;
+}
+
+.container-detail {
+  margin-left: 10px;
+}
+
+.icon2 {
+  font-size: 30px;
+  color: #6c63ff;
+}
+
+.city-name {
+  font-size: 20px;
+  color: #6c63ff;
+}
+ */
+
+
+ /* Add your existing styles here
+
+.card-bg-small {
+  background-color: #f0f0f0;
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+.total-temp-small {
+  font-size: 24px;
+  margin: 10px 0;
+}
+
+.city-name-small {
+  font-size: 18px;
+  color: #333;
+}
+
+.main-container-small {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.container-detail-small {
+  flex: 1;
+  text-align: left;
+  padding: 5px;
+}
+
+.icon2 {
+  font-size: 24px;
+}
+
+.per-hue-small,
+.air-rate-small {
+  margin: 0;
+  font-size: 14px;
+} */
+
+
+/* Weather.css */
+
+/* Weather.css */
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Arial', sans-serif;
+}
+
+.navbar {
+  background: transparent;
+}
+
+.day {
+  background-image:  URL("https://i.pinimg.com/564x/15/99/62/15996261974742d0f628733af65b9785.jpg");
+  overflow: hidden;
+  background-size: cover;
+  color: #fff;
+}
+
+.night {
+ background-image:  URL("https://cdn.wallpapersafari.com/7/73/DV9qfJ.jpg");
+ overflow: hidden;
+ background-size: cover;
+ color: #fff;
+}
+
+.navbar-brand {
+  margin-right: 30px;
+}
+
+.temperature {
+  font-size: 2.9rem;
+  margin: 0;
+  color: #fff;
+}
+
+.location{
+  color: #fff;
+  font-size: 1rem;
+  margin-top: 4px;
+  padding-left: 15px;
+}
+
+.navbar-toggler {
+  border: none;
+}
+
+.search-bar {
+  display: block;
+  align-items: center;
+  position: absolute;
+  right: 10px;
+  cursor: pointer;
+}
+
+.form-control.input {
+  border: none;
+  border-bottom: 2px solid #ffffff;
+  outline: none;
+  padding-right: 30px;
+  margin-right: 20px; /* Added */
+ }
+
+.search-icon {
+  position: absolute;
+  right: 16px;
+  margin-top: -52px;
+  padding: 0%;
+  cursor: pointer;
+}
+
+.labels {
+  font-size: 0.9rem;
+  margin: 0;
+  display: flex;
+  align-items: center; /* Added */
+}
+
+.details {
+  display: absolute;
+  align-items: center;
+  margin-right: 380px;
+  margin-top: 10px; /* Added */
+  color:rgb(255, 255, 255);
+  font-weight: bolder;
+  font-size: 0%;
+}
+
+.details span {
+  margin-right: 20px;
+}

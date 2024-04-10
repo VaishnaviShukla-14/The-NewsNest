@@ -1,0 +1,9 @@
+.table-header {
+    /* ... other styles ... */
+    transition: color 0.3s ease-in-out, transform 0.3s ease-in-out; /* Combined animation */
+  }
+  
+  .table-header:hover {
+    color:maroon; /* Change color on hover */
+    transform: scale(1.03, 1) scaleY(0.97); /* Pulse effect */
+  }
