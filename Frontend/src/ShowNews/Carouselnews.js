@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import Slider from 'react-slick';
+import { Link } from 'react-router-dom'; // Import Link from react-router-dom
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
@@ -53,22 +54,23 @@ const Carouselnews = () => {
   };
 
   return (
-    <div style={styles.carouselContainer}>
-      <Slider ref={sliderRef} {...settings}>
-        {carouselItems.map((item, index) => (
-          <div key={index} onClick={handleSlideClick}>
-            {item.video ? (
-              <video style={styles.media} controls>
-                <source src={`http://localhost:3001/${item.video}`} type="video/mp4" />
-                Your browser does not support the video tag.
-              </video>
-            ) : (
-              <img src={`http://localhost:3001/${item.image}`} alt="Carousel Item" style={styles.media} />
-            )}
-          </div>
-        ))}
-      </Slider>
-    </div>
+      
+      <div style={styles.carouselContainer}>
+        <Slider ref={sliderRef} {...settings}>
+          {carouselItems.map((item, index) => (
+            <div key={index} onClick={handleSlideClick}>
+              {item.video ? (
+                <video style={styles.media} controls>
+                  <source src={`http://localhost:3001/${item.video}`} type="video/mp4" />
+                  Your browser does not support the video tag.
+                </video>
+              ) : (
+                <img src={`http://localhost:3001/${item.image}`} alt="Carousel Item" style={styles.media} />
+              )}
+            </div>
+          ))}
+        </Slider>
+      </div>
   );
 };
 
@@ -79,7 +81,7 @@ const styles = {
   },
   media: {
     width: '100%',
-    height: '300px',
+    height: '460px',
     objectFit: 'cover',
   },
 };

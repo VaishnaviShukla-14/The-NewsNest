@@ -1,5 +1,5 @@
 import React, { useState } from 'react'; // Import React for creating React components
-import './FPnew.css';
+import './FP_User.css';
 import { sendPasswordResetEmail } from 'firebase/auth';
 import { database } from '../Firebase/FirebaseConfigure';
 import { useNavigate } from 'react-router-dom'
@@ -8,7 +8,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 
 
-const FPnew = () => {
+const FP_User = () => {
   const navigate = useNavigate();
   
   const handleSubmit = async (e) => {
@@ -111,4 +111,4 @@ const FPnew = () => {
   );
 };
 
-export default FPnew;
+export default FP_User;

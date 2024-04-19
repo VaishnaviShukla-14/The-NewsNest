@@ -36,6 +36,7 @@ import FPnew from './Pages/FPnew';
 import UserLogin from './Pages/UserLogin';
 import SearchNews from './ShowNews/SearchNews';
 import HighNatioNews from './HighlightNews/HighNatioNews';
+import FP_User from './Pages/FP_User';
 
 
 function App() {
@@ -44,8 +45,9 @@ function App() {
       <div className='App'>
           <Routes>
           <Route path="/searchnews" element={<SearchNews/>} />
-          <Route path="/userlogin" element={<UserLogin/>} />
-          <Route path="/fpnew" element={<FPnew/>} />
+          <Route path="/UserLogin" element={<UserLogin/>} />
+          <Route path="/Fp_User" element={<FP_User/>} />
+          <Route path="/FPnew" element={<FPnew/>} />
           <Route path="/newlogin" element={<NewLogin/>} />
           <Route path="/mainpage" element={<MainPage />} />
           <Route path="/" element={<Thenewsroom />} />
@@ -56,7 +58,7 @@ function App() {
           <Route path="/frontpage" element={<FrontPage />} />
           <Route path="/weather" element={<Weather />} />
           <Route path="/logout" element={<Logout />} />
-          <Route path="/adminpage" element={<AdminPage />} />
+          <Route path="adminpage/" element={<AdminPage />} />
           <Route path="/user" element={<User />} />
           <Route path="/newspage" element={<NewsPage />} />
           <Route path="/nationalnews" element={<NationalNews />} />

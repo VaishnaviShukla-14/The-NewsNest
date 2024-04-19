@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Card, Button, Modal, Space } from 'antd';
-import { CloseOutlined } from '@ant-design/icons';
+import { CloseOutlined, LikeOutlined, DislikeOutlined, CommentOutlined, EyeOutlined } from '@ant-design/icons';
 import Cookies from 'js-cookie';
 
 const BlogNews = () => {
@@ -12,7 +12,7 @@ const BlogNews = () => {
     const [showDialog, setShowDialog] = useState(false);
     const [successAlert, setSuccessAlert] = useState(false);
     const [errorAlert, setErrorAlert] = useState(false);
-    const [showComments, setShowComments] = useState(false);
+    const [showComments, setShowComments] = useState({});
 
     useEffect(() => {
         const fetchBlogs = async () => {
@@ -27,6 +27,12 @@ const BlogNews = () => {
                         dislikedBy: blog.dislikedBy || [],
                     }));
                     setBlogs(processedBlogs);
+                    // Initialize showComments state object
+                    const initialShowCommentsState = {};
+                    processedBlogs.forEach(blog => {
+                        initialShowCommentsState[blog._id] = false;
+                    });
+                    setShowComments(initialShowCommentsState);
                 }
             } catch (error) {
                 console.error('Error fetching blogs:', error);
@@ -114,12 +120,18 @@ const BlogNews = () => {
         setShowDialog(prevState => !prevState);
     };
 
-    const handleToggleShowComments = () => {
-        setShowComments(prevState => !prevState);
+    const handleToggleShowComments = (_id) => {
+        setShowComments(prevState => ({
+            ...prevState,
+            [_id]: !prevState[_id]
+        }));
     };
 
-    const handleCloseComments = () => {
-        setShowComments(false);
+    const handleCloseComments = (_id) => {
+        setShowComments(prevState => ({
+            ...prevState,
+            [_id]: false
+        }));
     };
 
     const formatDate = (date) => {
@@ -139,26 +151,32 @@ const BlogNews = () => {
                 <h3 style={styles.title}>{blog.title}</h3>
                 <p style={styles.article}>{blog.article}</p>
                 <div style={styles.buttonContainer}>
-                    <Button onClick={() => handleLike(blog._id)} style={styles.button}>
-                        Like ({blog.likes})
+                    <div style={styles.leftButtons}>
+                        <Button onClick={() => handleLike(blog._id)} style={styles.iconButton}>
+                            <LikeOutlined />  ({blog.likes})
+                        </Button>
+                    </div>
+                    <div style={styles.rightButtons}>
+                        <Button onClick={() => handleDislike(blog._id)} style={styles.iconButton}>
+                            <DislikeOutlined/> ({blog.dislikes})
+                        </Button>
+                    </div>
+                </div>
+                <div style={styles.commentButtonContainer}>
+                    <Button onClick={handleToggleShowDialog} style={styles.commentButton}>
+                        <CommentOutlined /> Add
                     </Button>
-                    <Button onClick={() => handleDislike(blog._id)} style={styles.button}>
-                        Dislike ({blog.dislikes})
-                    </Button>
-                    <Button onClick={handleToggleShowDialog} style={styles.button}>
-                        Add Comment
-                    </Button>
-                    <Button onClick={handleToggleShowComments} style={styles.button}>
-                        {showComments ? 'Hide Comments' : 'Show Comments'}
+                    <Button onClick={() => handleToggleShowComments(blog._id)} style={styles.commentButton}>
+                        <EyeOutlined /> Show
                     </Button>
                 </div>
-                {showComments && (
+                {showComments[blog._id] && (
                     <div style={styles.commentContainer}>
                         <Space direction="vertical" style={{ width: '100%' }}>
                             <Button
                                 style={{ position: 'absolute', top: 0, right: 0 }}
                                 icon={<CloseOutlined />}
-                                onClick={handleCloseComments}
+                                onClick={() => handleCloseComments(blog._id)}
                             />
                             {comments.map((comment) => (
                                 <div key={comment._id} style={styles.comment}>
@@ -214,55 +232,79 @@ const BlogNews = () => {
 const styles = {
     blogContainer: {
         display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+        flexWrap: 'wrap',
     },
     card: {
-        width: '100%',
+        width: '350px',
         marginBottom: '20px',
-        borderRadius: '8px',
+        borderRadius: '5%',
         boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)',
     },
     mediaContainer: {
-        borderTopLeftRadius: '8px',
-        borderTopRightRadius: '8px',
+        borderRadius: '5%',
         overflow: 'hidden',
+        height: '200px',
     },
     media: {
         width: '100%',
-        height: '200px',
+        height: '100%',
         objectFit: 'cover',
     },
     content: {
         padding: '20px',
-        position: 'relative', // Required for absolute positioning of close button
+        position: 'relative',
     },
     title: {
-        fontSize: '24px',
+        fontSize: '20px',
         fontWeight: 'bold',
         marginBottom: '10px',
         textAlign: 'center',
         color: '#333',
     },
     article: {
-        fontSize: '16px',
-        color: '#666',
+        fontSize: '14px',
+        marginBottom: '10px',
+        textAlign: 'center',
+        color: '#333',
     },
     buttonContainer: {
         display: 'flex',
-        justifyContent: 'center',
+        flexDirection: 'row',
+        justifyContent: 'space-between',
         marginTop: '10px',
     },
-    button: {
-        marginRight: '10px',
+    leftButtons: {
+        display: 'flex',
+        alignItems: 'center',
+    },
+    rightButtons: {
+        display: 'flex',
+        alignItems: 'center',
+    },
+    iconButton: {
+        display: 'flex',
+        alignItems: 'center',
+        width: '110%',
+        padding:'0px 35px 0 34px',
+    },
+    commentButtonContainer: {
+        display: 'flex',
+        justifyContent: 'center',
+        justifyContent: 'space-between',
+        marginTop: '10px',
+    },
+    commentButton: {
+        width: '45%',
     },
     commentContainer: {
-        position: 'relative', // Required for absolute positioning of close button
-        maxHeight: '200px', // Limit height for scrolling
-        overflowY: 'auto', // Enable vertical scrolling
+        position: 'relative',
+        maxHeight: '200px',
+        overflowY: 'auto',
         border: '1px solid #ccc',
         borderRadius: '5px',
-        padding: '10px',
+        padding: '5px',
         marginTop: '10px',
     },
     comment: {
@@ -274,3 +316,4 @@ const styles = {
 };
 
 export default BlogNews;
+

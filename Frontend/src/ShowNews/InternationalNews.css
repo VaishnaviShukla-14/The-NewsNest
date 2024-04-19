@@ -1,4 +1,4 @@
-/* InternationalNews.css */
+/* InternationalNews.css
 
 .container {
     max-width: 1200px;
@@ -45,7 +45,18 @@
   
   .card p:last-child {
     margin-bottom: 0;
-  }
+  } */
   
   /* Add any additional styling based on your design preferences */
   
+
+  .news-image{
+    height: 400px;
+    width: 400px;
+    margin-left: 240px;
+}
+
+.container{
+    margin-top: 5%;
+    margin-bottom: 5%;
+}

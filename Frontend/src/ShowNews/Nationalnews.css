@@ -1,23 +1,23 @@
-.container {
+/* .container {
     max-width: 800px;
     margin: 0 auto;
     padding: 20px;
-}
+} */
 
-.card-container {
+/* .card-container {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     gap: 20px;
-}
+} */
 
-.card {
+/* .card {
     background-color: #fff;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     padding: 20px;
-}
+} */
 
-.card img {
+/* .card img {
     max-width: 100%;
     height: auto;
     border-radius: 4px;
@@ -37,4 +37,16 @@
 
 .card p:last-child {
     margin-bottom: 0;
+} */
+
+
+.news-image{
+    height: 600px;
+    width: 600px;
+    margin-left: 240px;
+}
+
+.container{
+    margin-top: 5%;
+    margin-bottom: 5%;
 }

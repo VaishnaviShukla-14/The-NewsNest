@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom'; // Import Link from react-router-dom
 import './SportsNews.css'; // Update the CSS file name if needed
+import Navbar from '../Pages/Navbar';
+import Footer from '../MandatoryItems/Footer';
 
 const SportsNews = () => {
     const [sportsNews, setSportsNews] = useState([]);
@@ -39,27 +42,31 @@ const SportsNews = () => {
     };
 
     return (
-        <div className="container">
-            <div className="card-container">
-                {sportsNews.length > 0 ? (
-                    sportsNews.map((news, index) => (
-                        <div className="card" key={index}>
-                            <h3>{news.title}</h3>
-                            <p>{news.article}</p>
-                            {news.image && <img src={`http://localhost:3001/${news.image}`} alt="News Image" />}
-                            {news.video && (
-                                <video controls>
-                                    <source src={`http://localhost:3001/${news.video}`} type="video/mp4" />
-                                    Your browser does not support the video tag.
-                                </video>
-                            )}
-                        </div>
-                    ))
-                ) : (
-                    <p>No sports news available for today.</p>
-                )}
+        <>
+        <Navbar/>
+            <div className="container">
+                <div className="card-container">
+                    {sportsNews.length > 0 ? (
+                        sportsNews.map((news, index) => (
+                            <div className="card" key={index}>
+                                <h3>{news.title}</h3>
+                                <p>{news.article}</p>
+                                {news.image && <img src={`http://localhost:3001/${news.image}`} alt="News Image" />}
+                                {news.video && (
+                                    <video controls>
+                                        <source src={`http://localhost:3001/${news.video}`} type="video/mp4" />
+                                        Your browser does not support the video tag.
+                                    </video>
+                                )}
+                            </div>
+                        ))
+                    ) : (
+                        <p>No sports news available for today.</p>
+                    )}
+                </div>
             </div>
-        </div>
+            <Footer/>
+            </>
     );
 };
 

@@ -63,28 +63,29 @@
 
 // export default SearchNews;
 
-
 import React, { useState } from 'react';
 import axios from 'axios';
+import TextField from '@mui/material/TextField';
 
 const SearchNews = () => {
-  const [formData, setFormData] = useState({
-    date: '',
-    title: ''
-  });
+  const [searchQuery, setSearchQuery] = useState('');
   const [searchResults, setSearchResults] = useState({});
   const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    setSearchQuery(e.target.value);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
     try {
+      // Check if the search query matches the date format (YYYY-MM-DD)
+      const isDate = /^\d{4}-\d{2}-\d{2}$/.test(searchQuery);
+      // Set the search parameters based on whether it's a date or title search
+      const params = isDate ? { date: searchQuery } : { title: searchQuery };
       const response = await axios.get('http://localhost:3001/api/search', {
-        params: formData
+        params: params
       });
       setSearchResults(response.data);
     } catch (error) {
@@ -95,17 +96,11 @@ const SearchNews = () => {
 
   return (
     <div>
-      <h2>Search News</h2>
       <form onSubmit={handleSubmit}>
         <div>
-          <label>Date (YYYY-MM-DD):</label>
-          <input type="text" name="date" value={formData.date} onChange={handleChange} />
+          <TextField type="text" value={searchQuery} onChange={handleChange} label="YYYY-MM-DD or Title" variant="outlined" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <button type="submit" disabled={loading}>Search</button>
         </div>
-        <div>
-          <label>Title:</label>
-          <input type="text" name="title" value={formData.title} onChange={handleChange} />
-        </div>
-        <button type="submit" disabled={loading}>Search</button>
       </form>
       {loading && <p>Loading...</p>}
       {Object.keys(searchResults).map((category, index) => (

@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import './EducationalNews.css';
+import Navbar from '../Pages/Navbar';
+import Footer from '../MandatoryItems/Footer';
 
 const EducationalNews = () => {
     const [nationalNews, setNationalNews] = useState([]);
@@ -49,6 +51,10 @@ const EducationalNews = () => {
     };
 
     return (
+        <>
+        <div>
+            <Navbar/>
+        </div>
         <div className="container">
             <div className="card-container">
                 {nationalNews.length > 0 ? (
@@ -73,6 +79,8 @@ const EducationalNews = () => {
                 )}
             </div>
         </div>
+        <Footer/>
+        </>
     );
 };
 

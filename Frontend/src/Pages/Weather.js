@@ -140,7 +140,7 @@ function Weather() {
                 list="datalistOptions"
                 placeholder="Search city"
               />
-              <i className="bi bi-search search-icon" onClick={() => search(document.querySelector(".form-control.input").value)} style={{color:'black', marginTop: '-30px' }}></i>
+              <i className="bi bi-search search-icon" onClick={() => search(document.querySelector(".form-control.input").value)} style={{color:'black', marginTop: '-48px' }}></i>
             </li>
             <li className="nav-item details">
               <p className="labels">

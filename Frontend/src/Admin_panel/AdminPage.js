@@ -8,7 +8,7 @@ const AdminPage = () => {
         <>
             <div>
                 <div><Appbar2 /></div>
-                <div style={{marginTop:'18.7%'}}><ActionButtonnew/></div>
+                <div style={{marginTop:'-4%'}}><ActionButtonnew/></div>
              
                
 

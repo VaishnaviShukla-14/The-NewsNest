@@ -21,7 +21,7 @@ code {
 .css-12i7wg6-MuiPaper-root-MuiDrawer-paper {
   top: 309.7px !important;
   position: fixed;
-  width: 220px; /* Set a width to prevent stretching */
+  width: 240px; /* Set a width to prevent stretching */
   background-color: rgb(228, 101, 245);
 }
 

@@ -12,7 +12,7 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import '../index.css';
 
 
-const drawerWidth = 200;
+const drawerWidth = 227;
 
 function LeftDrawer() {
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -148,10 +148,10 @@ function LeftDrawer() {
               </Link>
             </List>
           </Popover>
-          <ul>
-           <li style={{listStyle:"none"}}><PersonIcon/><Link className='ms-3' style={{textDecoration:"none",color:"black",}} to='/user'>USER</Link></li>
-           <li style={{listStyle:"none"}}><PersonIcon/><Link className='ms-3' style={{textDecoration:"none",color:"black",}} to='/deleteUser'>DeletedUser</Link></li>
-           <li style={{listStyle:"none"}}><PersonIcon/><Link className='ms-3' style={{textDecoration:"none",color:"black",}} to='/logout'>Logout</Link></li>
+          <ul style={{padding:"14px", fontSize:"19px"}}>
+           <li style={{listStyle:"none"}}><PersonIcon/><Link className='ms-3' style={{textDecoration:"none",color:"black",padding:"20px"}} to='/user'>USER</Link></li><br/>
+           <li style={{listStyle:"none"}}><PersonIcon/><Link className='ms-3' style={{textDecoration:"none",color:"black",padding:"19px"}} to='/deleteUser'>DeletedUser</Link></li><br/>
+           <li style={{listStyle:"none"}}><PersonIcon/><Link className='ms-3' style={{textDecoration:"none",color:"black",padding:"20px"}} to='/logout'>Logout</Link></li><br/>
           </ul>
 
         </List>

@@ -1,6 +1,6 @@
-.section{
+.news-section{
     width: 100%;
-    min-height: 100vh; /* changed height to min-height */
+    min-height: 48vh; /* changed height to min-height */
   }
 
 
@@ -31,7 +31,14 @@
   /* justify-content: center; */  /* Uncomment if you want centering */
 }
 
-.nav-options li {
+.sports-options{
+  display: flex; /* Arrange options horizontally */
+  list-style: none; /* Remove default bullet points */
+  padding: 0; /* Remove default padding */
+  margin: 0;
+}
+
+.nav-options .nav-list .page-links {
   padding: 5px 10px; /* Add padding to each option */
   cursor: pointer; /* Style on hover (optional) */
   font-weight: bold;
@@ -41,10 +48,10 @@
   list-style: none;
   border-top: 4px solid #000;
   margin-bottom:20px;
+  color:black;
 }
 
-  .nav-options li:hover {
-    /* Hover color */
+  .nav-options .nav-list .page-links:hover {
     color: maroon;
     transform: translateY(-3px);    
   }  
