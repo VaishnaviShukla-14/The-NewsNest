@@ -1,19 +1,18 @@
-
-import React, { useState } from 'react';
-import axios from 'axios';
-import SweetAlert from 'react-bootstrap-sweetalert';
-import { useNavigate } from 'react-router-dom';
-import { message, Button, Input, Select } from 'antd';
-import { UploadOutlined } from '@ant-design/icons';
-import Cookies from 'js-cookie';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import SweetAlert from "react-bootstrap-sweetalert";
+import { useNavigate } from "react-router-dom";
+import { message, Button, Input, Select } from "antd";
+import { UploadOutlined } from "@ant-design/icons";
+import Cookies from "js-cookie";
 
 const { Option } = Select;
 
 const InternationalForm = ({ isVisible, onClose }) => {
   const [formData, setFormData] = useState({
-    title: '',
-    article: '',
-    highlight: 'none',
+    title: "",
+    article: "",
+    highlight: "none",
     date: new Date().toLocaleDateString(),
     time: getCurrentTime(),
     image: null,
@@ -22,10 +21,18 @@ const InternationalForm = ({ isVisible, onClose }) => {
 
   const [successAlert, setSuccessAlert] = useState(false);
   const [errorAlert, setErrorAlert] = useState(false);
-  const [errorMessage, setErrorMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState("");
+  const [userName, setUserName] = useState("");
 
   const Navigate = useNavigate();
   const [messageApi, contextHolder] = message.useMessage();
+
+  useEffect(() => {
+    const storedName = localStorage.getItem("name");
+    if (storedName) {
+      setUserName(storedName);
+    }
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -45,8 +52,8 @@ const InternationalForm = ({ isVisible, onClose }) => {
 
   function getCurrentTime() {
     const now = new Date();
-    const hours = now.getHours().toString().padStart(2, '0');
-    const minutes = now.getMinutes().toString().padStart(2, '0');
+    const hours = now.getHours().toString().padStart(2, "0");
+    const minutes = now.getMinutes().toString().padStart(2, "0");
     return `${hours}:${minutes}`;
   }
 
@@ -59,30 +66,34 @@ const InternationalForm = ({ isVisible, onClose }) => {
     try {
       const formDataWithUser = {
         ...formData,
-        name: Cookies.get('name'), // Add the user's name to the form data
+        name: Cookies.get("name"), // Add the user's name to the form data
       };
 
       const formDataToSend = new FormData();
-      formDataToSend.append('name', formDataWithUser.name); // Add the user's name
-      formDataToSend.append('title', formDataWithUser.title);
-      formDataToSend.append('article', formDataWithUser.article);
-      formDataToSend.append('highlight', formDataWithUser.highlight);
-      formDataToSend.append('date', formDataWithUser.date);
-      formDataToSend.append('time', formDataWithUser.time);
-      formDataToSend.append('image', formDataWithUser.image);
-      formDataToSend.append('video', formDataWithUser.video);
+      formDataToSend.append("name", formDataWithUser.userName); // Add the user's name
+      formDataToSend.append("title", formDataWithUser.title);
+      formDataToSend.append("article", formDataWithUser.article);
+      formDataToSend.append("highlight", formDataWithUser.highlight);
+      formDataToSend.append("date", formDataWithUser.date);
+      formDataToSend.append("time", formDataWithUser.time);
+      formDataToSend.append("image", formDataWithUser.image);
+      formDataToSend.append("video", formDataWithUser.video);
 
-      const response = await axios.post('http://localhost:3001/api/internationalnews', formDataToSend, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-      });
+      const response = await axios.post(
+        "http://localhost:3001/api/internationalnews",
+        formDataToSend,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
 
       if (response && response.data) {
         setFormData({
-          title: '',
-          article: '',
-          highlight: 'none',
+          title: "",
+          article: "",
+          highlight: "none",
           date: new Date().toLocaleDateString(),
           time: getCurrentTime(),
           image: null,
@@ -91,15 +102,15 @@ const InternationalForm = ({ isVisible, onClose }) => {
         setSuccessAlert(true);
       }
     } catch (error) {
-      console.error('Error during runtime', error);
+      console.error("Error during runtime", error);
       setErrorAlert(true);
-      setErrorMessage('Error during submission. Please try again.');
+      setErrorMessage("Error during submission. Please try again.");
     }
   };
 
   const handleSuccessAlertClose = () => {
     setSuccessAlert(false);
-    Navigate('/AdminPage');
+    Navigate("/AdminPage");
   };
 
   const handleErrorAlertClose = () => {
@@ -116,7 +127,11 @@ const InternationalForm = ({ isVisible, onClose }) => {
       <div style={styles.formContainer}>
         <h2 style={styles.heading}>INTERNATIONAL FORM</h2>
         <div style={styles.formGroup}>
-          <h3 style={styles.subheading}>{`Date: ${formData.date}`} <br />{`Time: ${formData.time}`}<br /> {Cookies.get('name')}</h3>
+          <h3 style={styles.subheading}>
+            {`Date: ${formData.date}`} <br />
+            {`Time: ${formData.time}`}
+            <br /> {userName}
+          </h3>
         </div>
         <form onSubmit={handleSubmit}>
           <div style={styles.formGroup}>
@@ -187,9 +202,13 @@ const InternationalForm = ({ isVisible, onClose }) => {
               <option value="highlight">Highlight</option>
             </select>
           </div>
-          <br/>
+          <br />
           <div style={styles.formGroup}>
-            <Button type="primary" htmlType="submit" style={styles.submitButton}>
+            <Button
+              type="primary"
+              htmlType="submit"
+              style={styles.submitButton}
+            >
               SUBMIT
             </Button>
           </div>
@@ -199,7 +218,11 @@ const InternationalForm = ({ isVisible, onClose }) => {
         </Button>
 
         {successAlert && (
-          <SweetAlert success title="Success" onConfirm={handleSuccessAlertClose}>
+          <SweetAlert
+            success
+            title="Success"
+            onConfirm={handleSuccessAlertClose}
+          >
             Data entered successfully!
           </SweetAlert>
         )}
@@ -216,84 +239,82 @@ const InternationalForm = ({ isVisible, onClose }) => {
 
 const styles = {
   formContainer: {
-    maxWidth: '600px',
-    margin: 'auto',
-    padding: '20px',
-    backgroundColor:
-    '#ffffff',
-    borderRadius: '8px',
-    boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)',
-    marginTop:'20px',
-    border:'1px solid black',
+    maxWidth: "600px",
+    margin: "auto",
+    padding: "20px",
+    backgroundColor: "#ffffff",
+    borderRadius: "8px",
+    boxShadow: "0 0 10px rgba(0, 0, 0, 0.1)",
+    marginTop: "20px",
+    border: "1px solid black",
   },
   heading: {
-    color: 'black',
-    textAlign: 'center',
-    marginBottom: '20px',
-    fontFamily:'Times New Roman',
+    color: "black",
+    textAlign: "center",
+    marginBottom: "20px",
+    fontFamily: "Times New Roman",
   },
   subheading: {
-    color: '#888',
-    textAlign: 'right',
-    fontSize: '14px',
-    marginBottom: '10px',
+    color: "#888",
+    textAlign: "right",
+    fontSize: "14px",
+    marginBottom: "10px",
   },
   formGroup: {
-    marginBottom: '16px',
+    marginBottom: "16px",
   },
   label: {
-    display: 'block',
-    marginBottom: '8px',
-    fontWeight: 'bold',
+    display: "block",
+    marginBottom: "8px",
+    fontWeight: "bold",
   },
   input: {
-    width: '100%',
-    padding: '10px',
-    boxSizing: 'border-box',
-    border: '1px solid #ccc',
-    borderRadius: '4px',
-    marginBottom: '10px',
+    width: "100%",
+    padding: "10px",
+    boxSizing: "border-box",
+    border: "1px solid #ccc",
+    borderRadius: "4px",
+    marginBottom: "10px",
   },
   textarea: {
-    width: '100%',
-    padding: '10px',
-    boxSizing: 'border-box',
-    border: '1px solid #ccc',
-    borderRadius: '4px',
-    marginBottom: '10px',
+    width: "100%",
+    padding: "10px",
+    boxSizing: "border-box",
+    border: "1px solid #ccc",
+    borderRadius: "4px",
+    marginBottom: "10px",
   },
   select: {
-    width: '100%',
-    padding: '10px',
-    boxSizing: 'border-box',
-    border: '1px solid #ccc',
-    borderRadius: '4px',
-    marginBottom: '10px',
+    width: "100%",
+    padding: "10px",
+    boxSizing: "border-box",
+    border: "1px solid #ccc",
+    borderRadius: "4px",
+    marginBottom: "10px",
   },
   submitButton: {
-    backgroundColor: 'maroon',
-    color: 'white',
-    paddingbottom: '12px',
-    border: 'none',
-    borderRadius: '4px',
-    cursor: 'pointer',
-    fontSize: '16px',
-    fontWeight:'550',
-    marginLeft:'215px',
+    backgroundColor: "maroon",
+    color: "white",
+    paddingbottom: "12px",
+    border: "none",
+    borderRadius: "4px",
+    cursor: "pointer",
+    fontSize: "16px",
+    fontWeight: "550",
+    marginLeft: "215px",
   },
   closeButton: {
-    backgroundColor: 'maroon',
-    color: 'white',
-    paddingbottom: '12px',
-    border: 'none',
-    borderRadius: '4px',
-    cursor: 'pointer',
-    fontSize: '16px',
-    marginTop: '10px',
-    fontWeight:'550',
-    marginLeft:'195px',
+    backgroundColor: "maroon",
+    color: "white",
+    paddingbottom: "12px",
+    border: "none",
+    borderRadius: "4px",
+    cursor: "pointer",
+    fontSize: "16px",
+    marginTop: "10px",
+    fontWeight: "550",
+    marginLeft: "195px",
   },
 };
 
 export default InternationalForm;
-

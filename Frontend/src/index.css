@@ -19,11 +19,12 @@ code {
 
 
 .css-12i7wg6-MuiPaper-root-MuiDrawer-paper {
-  top: 309.7px !important;
+  top: 304.7px !important;
   position: fixed;
   width: 240px; /* Set a width to prevent stretching */
   background-color: rgb(228, 101, 245);
 }
+
 
 .css-12i7wg6-MuiPaper-root-MuiDrawer-paper {
   background-color: rgb(230, 99, 241);
@@ -120,3 +121,45 @@ padding-top: 20px;
 
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800;900&display=swap");
 
+
+.SearchBar_Button{
+  margin: 30px 30px 30px 30px;
+  /* margin-left: 35%; */
+}
+
+.SearchButton{
+  margin-top: 12px;
+  border-radius: 20px;
+  padding: 2px 5px 2px 5px;
+  background-color: rgb(149, 196, 235);
+  border-color: rgb(149, 196, 235);
+}
+
+.SearchItems{
+  margin-left: 35%;
+}
+
+.searchnews-image{
+  height: 320px;
+  width: 320px;
+  align-items: center;
+  align-content: center;
+  margin-left: 35%;
+}
+
+.SearchContent{
+  margin: 0px;
+  width: 100%;
+}
+
+/* index.css */
+.news-list {
+  padding: 0;
+  margin: 0;
+  text-decoration: none;
+  list-style: none;
+}
+
+.news-item {
+  margin-bottom: 20px;
+}

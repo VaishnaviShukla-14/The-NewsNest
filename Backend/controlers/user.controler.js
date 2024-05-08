@@ -4,14 +4,15 @@ const genrateToken = require("../helpers/generatetoken");
 
 //signup
 const addUser = async (req, res) => {
-  const { name, email, phone, adharcard, address, password } = req.body;
+  const { name, email, phone, adharcard, address } = req.body;
   try {
-      const newUser = new User({ name, email, phone, password, adharcard, address });
-      await newUser.save();
-      res.status(200).json({ mess: "User Save SuccessFully", newUser });
+    const newUser = new User({ name, email, phone, adharcard, address });
+
+    await newUser.save();
+    res.status(200).json({ message: "User saved successfully", newUser });
   } catch (error) {
-      console.error(error); // Log the error to the console
-      res.status(500).json({ mess: "Error To save the User", error: error.message });
+    console.error(error); // Log the error to the console
+    res.status(500).json({ message: "Error saving the user", error: error.message });
   }
 };
 

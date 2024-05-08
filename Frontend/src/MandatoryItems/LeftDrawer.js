@@ -57,7 +57,7 @@ function LeftDrawer() {
 
 
     >
-      <div style={{ marginTop: '15%', backgroundcolor: 'rgb(218, 140, 23)' }}>
+      <div style={{ marginTop: '13%', backgroundcolor: 'rgb(218, 140, 23)' }}>
         <List>
           <ListItem disablePadding>
             <ListItemButton
@@ -150,7 +150,7 @@ function LeftDrawer() {
           </Popover>
           <ul style={{padding:"14px", fontSize:"19px"}}>
            <li style={{listStyle:"none"}}><PersonIcon/><Link className='ms-3' style={{textDecoration:"none",color:"black",padding:"20px"}} to='/user'>USER</Link></li><br/>
-           <li style={{listStyle:"none"}}><PersonIcon/><Link className='ms-3' style={{textDecoration:"none",color:"black",padding:"19px"}} to='/deleteUser'>DeletedUser</Link></li><br/>
+           <li style={{listStyle:"none"}}><PersonIcon/><Link className='ms-3' style={{textDecoration:"none",color:"black",padding:"19px"}} to='/deleteUser'>DELETEDUSER</Link></li><br/>
            <li style={{listStyle:"none"}}><PersonIcon/><Link className='ms-3' style={{textDecoration:"none",color:"black",padding:"20px"}} to='/logout'>Logout</Link></li><br/>
           </ul>
 

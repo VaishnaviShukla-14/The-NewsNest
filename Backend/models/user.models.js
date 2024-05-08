@@ -14,10 +14,6 @@ const userSchema = mongoose.Schema(
       type: Number,
       required: true,
     },
-    password: {
-      type: String,
-      required: true,
-    },
     adharcard: {
       type: String,
       required: true,
@@ -26,6 +22,10 @@ const userSchema = mongoose.Schema(
       type: String,
       required: true,
     },
+    // adharcardImage: {
+    //   type: String,
+    //   required: true,
+    // },
     // image: {
     //   type: String,
     //   required: true,

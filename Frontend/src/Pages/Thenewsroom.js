@@ -6,6 +6,7 @@ import HighInterNews from '../HighlightNews/HighInterNews';
 import HighEduNews from '../HighlightNews/HighEduNews';
 import HighSportsNews from '../HighlightNews/HighSportsNews';
 import Navbar from './Navbar';
+import Footer from '../MandatoryItems/Footer.js';
 
 const Thenewsroom = () => {
   return (
@@ -40,6 +41,10 @@ const Thenewsroom = () => {
        <div>
         <h1>SPORTS NEWS</h1>
        <HighSportsNews/>
+       </div>
+
+       <div>
+        <Footer/>
        </div>
        
     </>

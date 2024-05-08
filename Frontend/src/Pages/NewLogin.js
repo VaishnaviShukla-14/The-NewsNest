@@ -1,49 +1,85 @@
-import React from 'react';
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import './NewLogin.css';
-import {createUserWithEmailAndPassword, signInWithEmailAndPassword} from 'firebase/auth'
-import { database } from '../Firebase/FirebaseConfigure';
-import {useNavigate} from 'react-router-dom'
-import { Link } from 'react-router-dom';
+import React from "react";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import "./NewLogin.css";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
+import { database } from "../Firebase/FirebaseConfigure";
+import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const NewLogin = () => {
-  const navigate = useNavigate()
-  const handleRegister = (e)=>{
-    e.preventDefault()
-    const email = e.target.email.value
-    const password = e.target.password.value
-    const phone = e.target.phone.value
-    createUserWithEmailAndPassword(database,email,password,phone).then(data=>{
-      console.log(data);
-      navigate('/adminPage')
-    })
-  }
-  const handleLoginSubmit = (e) =>{
-    e.preventDefault()
-    const email = e.target.email.value
-    const password = e.target.password.value
-    signInWithEmailAndPassword(database,email,password).then(data=>{
-      console.log(data);
-      navigate('/adminPage')
-    }).catch(err=>{
-      alert(err.code)
-    })
-  }
- 
+  const navigate = useNavigate();
+
+  const handleRegister = (e) => {
+    e.preventDefault();
+    const email = e.target.email.value;
+    const password = e.target.password.value;
+    const phone = e.target.phone.value;
+    const name = e.target.name.value;
+
+    createUserWithEmailAndPassword(database, email, password, phone)
+      .then((data) => {
+        console.log(data);
+
+        // Fetch user data from Firebase after successful registration
+        const userData = {
+          email: data.user.email,
+          uid: data.user.uid,
+          // Add any other relevant user data here
+        };
+
+        // Store user data in localStorage
+        localStorage.setItem("userData", JSON.stringify(userData));
+        localStorage.setItem("name", name);
+        localStorage.setItem("phone", phone);
+
+        // Navigate to the second page
+        navigate("/adminPage");
+      })
+      .catch((error) => {
+        console.error("Error registering user:", error);
+      });
+  };
+
+  const handleLoginSubmit = (e) => {
+    e.preventDefault();
+    const email = e.target.email.value;
+    const password = e.target.password.value;
+    const name = e.target.name.value;
+    localStorage.setItem("name", name);
+    signInWithEmailAndPassword(database, email, password)
+      .then((data) => {
+        console.log(data);
+        navigate("/adminPage");
+      })
+      .catch((err) => {
+        alert(err.code);
+      });
+  };
 
   return (
     <>
       <body className="page-body">
         <div className="page-container">
-          <input type="checkbox" id="flip" style={{display:'none'}} />
+          <input type="checkbox" id="flip" style={{ display: "none" }} />
           <div className="cover">
             <div className="front">
-              <img className="frontImg" src="Images/login_register_logo.jpg" alt="" />
+              <img
+                className="frontImg"
+                src="Images/login_register_logo.jpg"
+                alt=""
+              />
             </div>
 
             <div className="back">
-              <img className="backImg" src="Images/login_register_logo.jpg" alt="" />
+              <img
+                className="backImg"
+                src="Images/login_register_logo.jpg"
+                alt=""
+              />
             </div>
           </div>
 
@@ -51,23 +87,43 @@ const NewLogin = () => {
             <div className="form-content">
               <div className="signup-form">
                 <div className="titles">REGISTER</div>
-                <form onSubmit={(e)=>handleRegister(e)}>
+                <form onSubmit={(e) => handleRegister(e)}>
                   <div className="input-boxes">
                     <div className="input-box">
                       <i className="fa-solid fa-user"></i>
-                      <input type="text" placeholder='Name' name="name"  required />
+                      <input
+                        type="text"
+                        placeholder="Name"
+                        name="name"
+                        required
+                      />
                     </div>
                     <div className="input-box">
                       <i className="fa-solid fa-envelope"></i>
-                      <input type="text" placeholder='E-mail' name="email"  required/>
+                      <input
+                        type="text"
+                        placeholder="E-mail"
+                        name="email"
+                        required
+                      />
                     </div>
                     <div className="input-box">
                       <i className="fa-solid fa-lock"></i>
-                      <input type="password" placeholder='Password' name="password"  required/>
+                      <input
+                        type="password"
+                        placeholder="Password"
+                        name="password"
+                        required
+                      />
                     </div>
                     <div className="input-box">
                       <i className="fa-solid fa-phone"></i>
-                      <input type="tel" placeholder='Phone Number' name="phone"  required/>
+                      <input
+                        type="tel"
+                        placeholder="Phone Number"
+                        name="phone"
+                        required
+                      />
                     </div>
                     {/* <div className="input-box">
                       <i className="fa-solid fa-house"></i>
@@ -80,7 +136,10 @@ const NewLogin = () => {
                     <div className="buttons input-box">
                       <input type="submit" value="Submit" />
                     </div>
-                    <div className="login-text">Already have an account? <label htmlFor="flip">Login now</label></div>
+                    <div className="login-text">
+                      Already have an account?{" "}
+                      <label htmlFor="flip">Login now</label>
+                    </div>
                   </div>
                 </form>
               </div>
@@ -91,18 +150,43 @@ const NewLogin = () => {
                   <div className="input-boxes">
                     <div className="input-box">
                       <i className="fas fa-envelope"></i>
-                      <input type="text" placeholder="Enter your email" name="email" required />
+                      <input
+                        type="text"
+                        placeholder="Enter your email"
+                        name="email"
+                        required
+                      />
                     </div>
                     <div className="input-box">
                       <i className="fas fa-lock"></i>
-                      <input type="password" placeholder="Enter your password" name="password" required/>
+                      <input
+                        type="password"
+                        placeholder="Enter your password"
+                        name="password"
+                        required
+                      />
                     </div>
                     <div className="buttons input-box">
                       <input type="submit" value="Submit" />
                     </div>
-                    
-                    <div className="register-text">Don't have an account? <label htmlFor="flip">Register now</label></div>
-                    <div className="fp-anchor"><Link to="/forgot" style={{textAlign:'center',textDecoration:'none',color:'black',marginLeft:'113px'}}>Forgot Password?</Link></div>
+
+                    <div className="register-text">
+                      Don't have an account?{" "}
+                      <label htmlFor="flip">Register now</label>
+                    </div>
+                    <div className="fp-anchor">
+                      <Link
+                        to="/forgot"
+                        style={{
+                          textAlign: "center",
+                          textDecoration: "none",
+                          color: "black",
+                          marginLeft: "113px",
+                        }}
+                      >
+                        Forgot Password?
+                      </Link>
+                    </div>
                   </div>
                 </form>
               </div>
@@ -121,10 +205,10 @@ const NewLogin = () => {
         pauseOnFocusLoss
         draggable
         pauseOnHover
-        style={{ backgroundColor: 'maroon', color: 'white' }}
+        style={{ backgroundColor: "maroon", color: "white" }}
       />
     </>
-  )
-}
+  );
+};
 
 export default NewLogin;

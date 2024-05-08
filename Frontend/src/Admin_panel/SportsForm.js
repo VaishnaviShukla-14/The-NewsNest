@@ -37,11 +37,31 @@ const SportsForm = ({ isVisible, onClose }) => {
 
   const handlefileChange = (e) => {
     const file = e.target.files[0];
+    const fileSize = file.size / 1024; // Size in KB
+    if (fileSize > 100) {
+        alert("Please select an image file less than 100KB.");
+   
+        event.target.value = null;
+    } else {
     setFormData((prevData) => ({
       ...prevData,
       [e.target.name]: file,
     }));
+  }
   };
+
+//   const handleFileChange = (event) => {
+//     const file = event.target.files[0];
+//     const fileSize = file.size / 1024; // Size in KB
+//     if (fileSize > 100) {
+//         alert("Please select an image file less than 100KB.");
+   
+//         event.target.value = null;
+//     } else {
+//         // Proceed with the file
+//         // You can add additional handling here if needed
+//     }
+// };
 
   function getCurrentTime() {
     const now = new Date();
@@ -161,14 +181,14 @@ const SportsForm = ({ isVisible, onClose }) => {
               Image:
             </label>
             <input
-              type="file"
-              id="image"
-              name="image"
-              onChange={handlefileChange}
-              style={styles.input}
-              accept="image/*"
-              required
-            />
+    type="file"
+    id="image"
+    name="image"
+    onChange={handlefileChange}
+    style={styles.input}
+    accept="image/*"
+    required
+/>
           </div>
           <div style={styles.formGroup}>
             <label htmlFor="video" style={styles.label}>

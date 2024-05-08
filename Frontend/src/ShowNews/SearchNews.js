@@ -1,71 +1,9 @@
-// import React, { useState } from 'react';
-// import axios from 'axios';
-
-// const SearchNews = () => {
-//   const [formData, setFormData] = useState({
-//     date: '',
-//     title: ''
-//   });
-//   const [searchResults, setSearchResults] = useState([]);
-//   const [loading, setLoading] = useState(false);
-
-//   const handleChange = (e) => {
-//     setFormData({ ...formData, [e.target.name]: e.target.value });
-//   };
-
-//   const handleSubmit = async (e) => {
-//     e.preventDefault();
-//     setLoading(true);
-//     try {
-//       const response = await axios.get('http://localhost:3001/api/search', {
-//         params: formData
-//       });
-//       setSearchResults(response.data);
-//     } catch (error) {
-//       console.error('Error searching national news:', error);
-//     }
-//     setLoading(false);
-//   };
-
-//   return (
-//     <div>
-//       <h2>Search National News</h2>
-//       <form onSubmit={handleSubmit}>
-//         <div>
-//           <label>Date (YYYY-MM-DD):</label>
-//           <input type="text" name="date" value={formData.date} onChange={handleChange} />
-//         </div>
-//         <div>
-//           <label>Title:</label>
-//           <input type="text" name="title" value={formData.title} onChange={handleChange} />
-//         </div>
-//         <button type="submit" disabled={loading}>Search</button>
-//       </form>
-//       {loading && <p>Loading...</p>}
-//       {searchResults.length > 0 && (
-//         <div>
-//           <h3>Search Results:</h3>
-//           <ul>
-//             {searchResults.map((newsItem, index) => (
-//               <li key={index}>
-//                 <p>Title: {newsItem.title}</p>
-//                 <p>Article: {newsItem.article}</p>
-//                 <p>Date: {newsItem.date}</p>
-//                 {/* Add more fields as needed */}
-//               </li>
-//             ))}
-//           </ul>
-//         </div>
-//       )}
-//     </div>
-//   );
-// };
-
-// export default SearchNews;
-
+import '../index.css';
 import React, { useState } from 'react';
 import axios from 'axios';
 import TextField from '@mui/material/TextField';
+import Navbar from '../Pages/Navbar';
+import Footer from '../MandatoryItems/Footer';
 
 const SearchNews = () => {
   const [searchQuery, setSearchQuery] = useState('');
@@ -95,25 +33,32 @@ const SearchNews = () => {
   };
 
   return (
+    <>
     <div>
+    <Navbar/>
+    </div>
+    <div className='SearchBar_Button'>
       <form onSubmit={handleSubmit}>
-        <div>
-          <TextField type="text" value={searchQuery} onChange={handleChange} label="YYYY-MM-DD or Title" variant="outlined" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          <button type="submit" disabled={loading}>Search</button>
+        <div className='SearchItems'>
+          <TextField className='Searchfield' type="text" value={searchQuery} onChange={handleChange} label="YYYY-MM-DD or Title" variant="outlined" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <button className='SearchButton' type="submit" disabled={loading}>Search</button>
         </div>
       </form>
+      <br/>
       {loading && <p>Loading...</p>}
       {Object.keys(searchResults).map((category, index) => (
-        <div key={index}>
-          <h3>{category.toUpperCase()} News</h3>
+        <div key={index} className='SearchContent'>
+          <br/>
+          <h3 style={{ fontFamily: 'Times New Roman',marginLeft:"35%"}}>{category.toUpperCase()}&nbsp;&nbsp;NEWS</h3><br/>
           {searchResults[category].length > 0 ? (
-            <ul>
+            <ul className="news-list">
               {searchResults[category].map((newsItem, newsIndex) => (
-                <li key={newsIndex}>
-                  <p>Title: {newsItem.title}</p>
-                  <p>Article: {newsItem.article}</p>
-                  <p>Date: {newsItem.date}</p>
+                <li key={newsIndex} className="news-item">
+                  <h4>{newsItem.title}</h4>
+                  <img className="searchnews-image" src={`http://localhost:3001/${newsItem.image}`} alt="News Image" />
+                  <p> {newsItem.article}</p>
                   {/* Add more fields as needed */}
+                  <br/>
                 </li>
               ))}
             </ul>
@@ -123,6 +68,10 @@ const SearchNews = () => {
         </div>
       ))}
     </div>
+    <div>
+      <Footer/>
+    </div>
+    </>
   );
 };
 
